@@ -26,7 +26,7 @@
     this.state = {
       fadeInOpacity: new Animated.Value(0),
       rotation: new Animated.Value(0),
-      // bounceValue: new Animated.Value(1.5),
+      bounceValue: new Animated.Value(1.5),
 
       //`try to callback another function to implement Animation after fisrt render finishing`
       //`但是在该位置定义函数的时候this.state.bounceValue is undefined`
@@ -53,7 +53,7 @@
             outputRange: ['0deg', '360deg']
           })
         },
-        // {scale: this.state.bounceValue}
+        {scale: this.state.bounceValue}
         ],
         width:300,
         height:300,
@@ -75,21 +75,39 @@
       // }).start();
       // this.state.bounceValue.setValue(1.5),
 
-      //`parallel animation`
-      Animated.parallel(
-        ['fadeInOpacity', 'rotation'].map(property =>{
-          return Animated.timing(this.state[property],{
+      Animated.sequence(
+      [
+        //`parallel animation`
+        Animated.parallel(
+          // ['fadeInOpacity', 'rotation'].map(property =>{
+          //   return Animated.timing(this.state[property],{
+          //     toValue: 1,
+          //     duration: 2000
+          //   })
+
+        [ Animated.timing(this.state.fadeInOpacity, {
             toValue: 1,
             duration: 2000
-        })
+          }),
+           Animated.timing(this.state.rotation, {
+            toValue: 1,
+            duration: 2000
+           }),
+        ]
+          //`unsolved when wanna to use another Animated`
+          // Animated.spring(this.state.bounceValue,
+          // {
+          //   toValue: 0.8,
+          //   friction: 1,
+          // })
+        ),
 
-        //`unsolved when wanna to use another Animated`
-        // Animated.spring(this.state.bounceValue,
-        // {
-        //   toValue: 0.8,
-        //   friction: 1,
-        // })
-      })).start();
+        // this.state.bounceValue.setValue(1.5),
+        Animated.spring(this.state.bounceValue,{
+          toValue: 0.8,
+          friction: 1,
+        })
+      ]).start();
     }
 
       //`try to callback another function to implement Animation after fisrt render finishing`
@@ -99,7 +117,7 @@
       //   Animated.spring(this.state.bounceValue,{
       //     toValue: 0.8,
       //     friction: 1,
-      //   }).start();
+      //   }).start(;
       // }
 }
 
