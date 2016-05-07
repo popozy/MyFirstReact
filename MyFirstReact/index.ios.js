@@ -4,6 +4,9 @@
  * @flow
  */
 
+'use strict';
+
+ var ReactNative = require('react-native');
  import React, { Component } from 'react';
  import {
   AppRegistry,
@@ -11,14 +14,11 @@
   Text,
   View,
   Image,
-  Animated
+  Animated,
+  PanResponder
 } from 'react-native';
 
- // styles = StyleSheet.create({
- //    demo: {
 
- //    }
- //  });
 
  class MyFirstReact extends React.Component {
   constructor(props: any){
