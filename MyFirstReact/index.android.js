@@ -1,124 +1,66 @@
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
- * @flow
  */
 
 'use strict';
 
- var ReactNative = require('react-native');
- import React, { Component } from 'react';
- import {
+var React = require('react-native');
+var {
   AppRegistry,
   StyleSheet,
   Text,
   View,
-  Image,
-  Animated,
-  PanResponder
-} from 'react-native';
+  TouchableHighlight
+} = React;
 
-
-
- class MyFirstReact extends React.Component {
-  constructor(props: any){
-    super(props);
-    this.state = {
-      fadeInOpacity: new Animated.Value(0),
-      rotation: new Animated.Value(0),
-      bounceValue: new Animated.Value(1.5),
-
-      //`try to callback another function to implement Animation after fisrt render finishing`
-      //`但是在该位置定义函数的时候this.state.bounceValue is undefined`
-      // AfterRender: new function(){
-      //   // this.state.bounceValue.setValue(1.5),
-      //   Animated.spring(this.state.bounceValue,{
-      //     toValue: 0.8,
-      //     friction: 1,
-      //   }).start();
-      // }
-    };
-
+var MyFirstReact = React.createClass({
+  _onPressIn() {
+    this.start = Date.now()
+    console.log("press in")
+  },
+  _onPressOut() {
+    console.log("press out")
+  },
+  _onPress() {
+    console.log("press")
+  },
+  _onLonePress() {
+    console.log("long press " + (Date.now() - this.start))
+  },
+  render: function() {
+    return (
+      <View style={styles.container}>
+        <TouchableHighlight
+          style = {styles.touchable}
+          onPressIn={this._onPressIn}
+          onPressOut={this._onPressOut}
+          onPress = {this._onPress}
+          onLongPress = {this._onLonePress}
+        >
+        <View style = {styles.button}></View>
+        </TouchableHighlight>
+      </View>
+    );
   }
+});
 
-  render():ReactElement{
-    return (<Animated.Image
-      source={require('./test.jpg')}
-      style = {{
-        opacity: this.state.fadeInOpacity,
-        transform:[
-        {
-          rotateZ: this.state.rotation.interpolate({
-            inputRange: [0,1],
-            outputRange: ['0deg', '360deg']
-          })
-        },
-        {scale: this.state.bounceValue}
-        ],
-        width:300,
-        height:300,
-        // flex: 1,        //unsolved problem: make it center at the view  by flex
-        // alignItems: 'center',
-        // justifyContent: 'center'
-        margin: 30
-      }}/>
-      );
-    }
+var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  button: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    backgroundColor: 'red'
+  },
+  touchable: {
+    borderRadius: 100
+  }
+});
 
-    componentDidMount(){
-
-      //`first demo for opacity increasing with time`
-      // Animated.timing(this.state.fadeInOpacity, {
-      //   toValue: 1,
-      //   duration: 1000,
-      //   // Easing: Easing.linear     //unsolved:error when running???
-      // }).start();
-      // this.state.bounceValue.setValue(1.5),
-
-      Animated.sequence(
-      [
-        //`parallel animation`
-        Animated.parallel(
-          // ['fadeInOpacity', 'rotation'].map(property =>{
-          //   return Animated.timing(this.state[property],{
-          //     toValue: 1,
-          //     duration: 2000
-          //   })
-
-        [ Animated.timing(this.state.fadeInOpacity, {
-            toValue: 1,
-            duration: 2000
-          }),
-           Animated.timing(this.state.rotation, {
-            toValue: 1,
-            duration: 2000
-           }),
-        ]
-          //`unsolved when wanna to use another Animated`
-          // Animated.spring(this.state.bounceValue,
-          // {
-          //   toValue: 0.8,
-          //   friction: 1,
-          // })
-        ),
-
-        // this.state.bounceValue.setValue(1.5),
-        Animated.spring(this.state.bounceValue,{
-          toValue: 0.8,
-          friction: 1,
-        })
-      ]).start();
-    }
-
-      //`try to callback another function to implement Animation after fisrt render finishing`
-      //`但是在AfterRender位置出现unexpected token`
-      // AfterRender: new function(){
-      //   // this.state.bounceValue.setValue(1.5),
-      //   Animated.spring(this.state.bounceValue,{
-      //     toValue: 0.8,
-      //     friction: 1,
-      //   }).start(;
-      // }
-}
-
-  AppRegistry.registerComponent('MyFirstReact', () => MyFirstReact);
+AppRegistry.registerComponent('MyFirstReact', () => MyFirstReact);
