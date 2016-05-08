@@ -137,6 +137,90 @@
 
 
 //`demo for panresponder: drop and drag`
+// 'use strict';
+
+// var React = require('react-native');
+// var {
+//   AppRegistry,
+//   StyleSheet,
+//   Text,
+//   View,
+//   PanResponder
+// } = React;
+
+// var MyFirstReact = React.createClass({
+//   getInitialState() {
+//     return {
+//       bg: '#fff',
+//       top: 0,
+//       left: 0
+//     }
+//   },
+
+//   componentWillMount() {
+//     this._panResponder = PanResponder.create({
+//       onStartShouldSetPanResponder: () => true,
+//       onMoveShouldSetPanResponder: () => true,
+//       onPanResponderGrant: () => {
+//         this._top = this.state.top
+//         this._left = this.state.left
+//         this.setState({
+//           bg: 'red'
+//         })
+//       },
+//       onPanResponderMove: (evt, gs) => {
+//         console.log(gs.dx + ' ' + gs.dy)
+//         this.setState({
+//           top: this._top + gs.dy,
+//           left: this._left + gs.dx
+//         })
+//       },
+//       onPanResponderRelease: (evt, gs) => {
+//         this.setState({
+//           bg: '#fff',
+//           top: this._top + gs.dy,
+//           left: this._left + gs.dx
+//         })
+//       }
+//     })
+//   },
+
+//   render: function() {
+//     return (
+//       <View style = {styles.container}>
+//         <View
+//           {...this._panResponder.panHandlers}
+//           style={[styles.rect,{
+//             "backgroundColor": this.state.bg,
+//             "top": this.state.top,
+//             "left": this.state.left,
+//           }]} />
+//       </View>
+//     );
+//   }
+// });
+
+// var styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     backgroundColor: '#F5FCFF',
+//   },
+
+//   rect: {
+//     width: 200,
+//     height: 200,
+//     borderWidth: 1,
+//     backgroundColor: '#000',
+//     position: 'absolute',
+//   }
+// });
+
+// AppRegistry.registerComponent('MyFirstReact', () => MyFirstReact);
+
+
+// `demo for combining animition and panResponder`
 'use strict';
 
 var React = require('react-native');
@@ -145,15 +229,19 @@ var {
   StyleSheet,
   Text,
   View,
-  PanResponder
+  PanResponder,
+  Image,
+  Animated
 } = React;
 
 var MyFirstReact = React.createClass({
   getInitialState() {
     return {
-      bg: '#fff',
+      fadeInOpacity: new Animated.Value(0),
+      rotation: new Animated.Value(0),
+      bounceValue: new Animated.Value(1.5),
       top: 0,
-      left: 0
+      left: 0,
     }
   },
 
@@ -164,9 +252,6 @@ var MyFirstReact = React.createClass({
       onPanResponderGrant: () => {
         this._top = this.state.top
         this._left = this.state.left
-        this.setState({
-          bg: 'red'
-        })
       },
       onPanResponderMove: (evt, gs) => {
         console.log(gs.dx + ' ' + gs.dy)
@@ -177,7 +262,6 @@ var MyFirstReact = React.createClass({
       },
       onPanResponderRelease: (evt, gs) => {
         this.setState({
-          bg: '#fff',
           top: this._top + gs.dy,
           left: this._left + gs.dx
         })
@@ -185,35 +269,60 @@ var MyFirstReact = React.createClass({
     })
   },
 
-  render: function() {
-    return (
-      <View style = {styles.container}>
-        <View
-          {...this._panResponder.panHandlers}
-          style={[styles.rect,{
-            "backgroundColor": this.state.bg,
-            "top": this.state.top,
-            "left": this.state.left,
-          }]} />
-      </View>
-    );
+  componentDidMount() {
+    Animated.sequence([
+      Animated.parallel([
+        Animated.timing(this.state.fadeInOpacity, {
+          toValue: 1,
+          duration: 2000
+        }),
+        Animated.timing(this.state.rotation, {
+          toValue: 1,
+          duration: 2000
+        }),
+      ]),
+      Animated.spring(this.state.bounceValue, {
+        toValue: 0.8,
+        friction: 1
+      })
+    ]).start();
+  },
+
+  render() {
+    return ( < View {...this._panResponder.panHandlers
+      }
+      style = {
+        {
+          "top": this.state.top,
+          "left": this.state.left,
+        }
+      } >
+      < Animated.Image source = {
+        require('./test.jpg')
+      }
+      style = {
+        [styles.rect, {
+          opacity: this.state.fadeInOpacity,
+          transform: [{
+            rotateZ: this.state.rotation.interpolate({
+              inputRange: [0, 1],
+              outputRange: ['0deg', '360deg']
+            })
+          }, {
+            scale: this.state.bounceValue
+          }],
+        }]
+      }
+      /></View > );
   }
+
 });
 
 var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-
   rect: {
-    width: 200,
-    height: 200,
-    borderWidth: 1,
-    backgroundColor: '#000',
-    position: 'absolute',
+    width: 300,
+    height: 300,
+    margin: 30
   }
 });
 
