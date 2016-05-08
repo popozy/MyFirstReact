@@ -1,8 +1,10 @@
 #MyFirstReact
 Personal daily practice on React native.
 
-#Gesture
-##Touch
+##LifeTime of the Responser
+
+##Gesture
+###Touch
     TouchableHighlight
     TouchableNativeFeedback
     TouchableOpacity
@@ -12,5 +14,5 @@ Personal daily practice on React native.
         1. 创建手势的对应class(设置触发引起的操作，render(return (introduce styles of frame && frame && OnpressIn = {this._onPressIn}...)))
         2. styles definition for step1
         3. AppRegistry
-##Gesture responder system
+###Gesture responder system
 
