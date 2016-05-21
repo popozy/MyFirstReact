@@ -7,17 +7,44 @@ var {
   Text,
   View,
   Image,
-  Animated
+  Animated,
+  TouchableHighlight,
 } = React;
 
 var MyFirstReact = React.createClass({
   getInitialState() {
     return {
-
+        pic1L: new Animated.value(0),
+        pic1T: new Animated.value(0),
+        pic2L: new Animated.value(-120),
+        pic2T: new Animated.value(0),
+        pic3T: new Animated.value(-75),
+        pic3L: new Animated.value(0),
+        pic4T: new Animated.value(-75),
+        pic4L: new Animated.value(-120),
     }
   },
 
-  componentDidMount() {
+  _onPressHandler() {
+    this.setState({
+    transform: [
+      {translateX:-20},
+      {translateY:-20},
+      {rotateZ: '20deg'}
+    ]
+    })
+    console.log('press 1')
+  },
+
+  _onPressHandler2() {
+
+  },
+
+  _onPressHandler3() {
+
+  },
+
+  _onPressHandler4() {
 
   },
 
@@ -27,36 +54,40 @@ var MyFirstReact = React.createClass({
       <View style={styles.container
       }>
         <View style={{flexWrap:'nowrap', flexDirection: 'row'}}>
-          <View style={styles.wrapper}>
-            <Image source={require('./img/9.jpg')} style={styles.rect}/>
-          </View>
-
-          <View style={styles.wrapper}>
-            <Image source={require('./img/9.jpg')} style={[styles.rect, {
+          <TouchableHighlight onPress = {this._onPressHandler} style={styles.wrapper}>
+            <Animated.Image source={require('./img/9.jpg')} style={[styles.rect,
               transform: [
-                {translateX: -120},
-                {translateY: 0}
+                {translateX: pic1L},
+                {translateY: pic1T}
               ]
-            }]}/>
-          </View>
+            ]}/>
+          </TouchableHighlight>
+          <TouchableHighlight onPress = {this._onPressHandler2} style={styles.wrapper}>
+            <Animated.Image source={require('./img/9.jpg')} style={[styles.rect, {
+                transform: [
+                  {translateX: pic2L},
+                  {translateY: pic2T}
+                ]
+              }]}/>
+          </TouchableHighlight>
         </View>
         <View style={{flexWrap: 'nowrap', flexDirection: 'row'}}>
-          <View style={styles.wrapper}>
-            <Image source={require('./img/9.jpg')} style={[styles.rect, {
-              transform: [
-                {translateX: 0},
-                {translateY: -75},
-              ]
-            }]}/>
-          </View>
-          <View style={styles.wrapper}>
-            <Image source={require('./img/9.jpg')} style={[styles.rect,{
-              transform: [
-                {translateX: -120},
-                {translateY: -75},
-              ]
-            }]}/>
-          </View>
+          <TouchableHighlight onPress = {this._onPressHandler3} style={styles.wrapper}>
+            <Animated.Image source={require('./img/9.jpg')} style={[styles.rect, {
+                transform: [
+                  {translateX: pic3L},
+                  {translateY: pic3T},
+                ]
+              }]}/>
+          </TouchableHighlight>
+          <TouchableHighlight onPress = {this._onPressHandler4} style={styles.wrapper}>
+            <Animated.Image source={require('./img/9.jpg')} style={[styles.rect,{
+                transform: [
+                  {translateX: pic4L},
+                  {translateY: pic4T},
+                ]
+              }]}/>
+          </TouchableHighlight>
         </View>
       </View>
     );
