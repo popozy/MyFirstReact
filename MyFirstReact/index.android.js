@@ -11,6 +11,13 @@ var {
   TouchableHighlight,
 } = React;
 
+var url_0 = require("./img/9.jpg");
+var url_1 = require("./img/4.jpg");
+var url_2 = require("./img/11.jpg");
+var url_3 = require("./img/16.jpg");
+// var url;
+// var url0=url_0, url1=url_0, url2=url_0, url3=url_0;
+
 var MyFirstReact = React.createClass({
   getInitialState() {
     return {
@@ -26,23 +33,57 @@ var MyFirstReact = React.createClass({
       rotation1: new Animated.Value(0),
       rotation2: new Animated.Value(0),
       rotation3: new Animated.Value(0),
+      fadeInOpacity: new Animated.Value(0),
+
+      //picture change
+      url0: url_0,
+      url1: url_0,
+      url2: url_0,
+      url3: url_0,
 
       //state for combine or spread
       spread: true,
+
       //4 direction offset Value
       t: -15,
       r: 15,
       b: 15,
       l: -15,
+
+      // height && weight
+      wid: 240,
+      hei: 150,
+      tx: -120,
+      ty: -75,
     }
   },
 
   _onPressHandler() {
     if(this.state.spread){
+        this.setState({
+          url0: url_0,
+          url1: url_1,
+          url2: url_2,
+          url3: url_3,
+          wid: 120,
+          hei: 75,
+          tx: 0,
+          ty: 0
+        });
         this.spread();
         this.state.spread = false;
     }
     else{
+        this.setState({
+          url0: url_0,
+          url1: url_0,
+          url2: url_0,
+          url3: url_0,
+          wid: 240,
+          hei: 150,
+          tx: -120,
+          ty: -75
+        });
         this.combine();
         this.state.spread = true;
     }
@@ -50,10 +91,30 @@ var MyFirstReact = React.createClass({
 
   _onPressHandler2() {
     if(this.state.spread){
+      this.setState({
+        url0: url_0,
+        url1: url_1,
+        url2: url_2,
+        url3: url_3,
+        wid: 120,
+        hei: 75,
+        tx: 0,
+        ty: 0
+      });
       this.spread();
       this.state.spread = false;
     }
     else{
+      this.setState({
+        url0: url_1,
+        url1: url_1,
+        url2: url_1,
+        url3: url_1,
+        wid: 240,
+        hei: 150,
+        tx: -120,
+        ty: -75
+      });
       this.combine();
       this.state.spread = true;
     }
@@ -61,10 +122,30 @@ var MyFirstReact = React.createClass({
 
   _onPressHandler3() {
     if(this.state.spread){
+      this.setState({
+        url0: url_0,
+        url1: url_1,
+        url2: url_2,
+        url3: url_3,
+        wid: 120,
+        hei: 75,
+        tx: 0,
+        ty: 0
+      });
       this.spread();
       this.state.spread = false;
     }
     else{
+      this.setState({
+        url0: url_2,
+        url1: url_2,
+        url2: url_2,
+        url3: url_2,
+        wid: 240,
+        hei: 150,
+        tx: -120,
+        ty: -75
+      });
       this.combine();
       this.state.spread = true;
     }
@@ -72,10 +153,30 @@ var MyFirstReact = React.createClass({
 
   _onPressHandler4() {
     if(this.state.spread){
+      this.setState({
+        url0: url_0,
+        url1: url_1,
+        url2: url_2,
+        url3: url_3,
+        wid: 120,
+        hei: 75,
+        tx: 0,
+        ty: 0
+      });
       this.spread();
       this.state.spread = false;
     }
     else {
+      this.setState({
+        url0: url_3,
+        url1: url_3,
+        url2: url_3,
+        url3: url_3,
+        wid: 240,
+        hei: 150,
+        tx: -120,
+        ty: -75
+      });
       this.combine();
       this.state.spread = true;
     }
@@ -143,9 +244,18 @@ var MyFirstReact = React.createClass({
     ])
   },
 
+
   spread() {
-    //movement && rotation
+    // url1 = url_1;
+    // url2 = url_2;
+    // url3 = url_3;
     Animated.parallel([
+      //movement && rotation
+      // Animated.timing(this.state.fadeInOpacity, {
+      //   toValue: 1,
+      //   duration: 900,
+      // }).start(),
+
       Animated.parallel([
         Animated.timing(this.state.x, {
           toValue: this.state.l,
@@ -158,7 +268,7 @@ var MyFirstReact = React.createClass({
         Animated.timing(this.state.rotation, {
           toValue: -8,
           duration: 900
-        })
+        }),
       ]).start(),
 
       Animated.parallel([
@@ -203,8 +313,15 @@ var MyFirstReact = React.createClass({
           duration: 900
         })
       ]).start(),
+
+      //picture change
+      Animated.timing(this.state.fadeInOpacity, {
+        toValue: 1,
+        duration: 900
+      }).start(),
     ])
   },
+
   render: function() {
     return (
       // width:800, height: 500
@@ -222,10 +339,12 @@ var MyFirstReact = React.createClass({
             }
           ]}
         ]}
-        onPress = {this._onPressHandler}
         >
           <TouchableHighlight onPress = {this._onPressHandler}>
-            <Animated.Image source={require('./img/9.jpg')} style={styles.rect}/>
+            <Animated.Image source={this.state.url0} style={[
+              {width: this.state.wid},
+              {height: this.state.hei},
+            ]}/>
           </TouchableHighlight>
         </Animated.View>
 
@@ -241,12 +360,14 @@ var MyFirstReact = React.createClass({
             }
           ]}
         ]}
-        onPress = {this._onPressHandler2}
         >
           <TouchableHighlight onPress = {this._onPressHandler2}>
-            <Animated.Image source={require('./img/9.jpg')} style={[styles.rect, {
+            <Animated.Image source={this.state.url1} style={[
+              {width: this.state.wid},
+              {height: this.state.hei},
+              {
                 transform: [
-                  {translateX: -120},
+                  {translateX: this.state.tx},
                   {translateY: 0}
                 ]
               }]}/>
@@ -264,13 +385,15 @@ var MyFirstReact = React.createClass({
               })
             }
           ]}
-        ]}
-        onPress = {this._onPressHandler3}>
-          <TouchableHighlight onPress = {this._onPressHandler2}>
-            <Animated.Image source={require('./img/9.jpg')} style={[styles.rect, {
+        ]}>
+          <TouchableHighlight onPress = {this._onPressHandler3}>
+            <Animated.Image source={this.state.url2} style={[
+               {width: this.state.wid},
+               {height: this.state.hei},
+               {
                 transform: [
                   {translateX: 0},
-                  {translateY: -75},
+                  {translateY: this.state.ty},
                 ]
               }]}/>
           </TouchableHighlight>
@@ -287,13 +410,15 @@ var MyFirstReact = React.createClass({
               })
             }
           ]}
-        ]}
-        onPress = {this._onPressHandler4}>
+        ]}>
           <TouchableHighlight onPress = {this._onPressHandler4}>
-            <Animated.Image source={require('./img/9.jpg')} style={[styles.rect,{
+            <Animated.Image source={this.state.url3} style={[
+              {width: this.state.wid},
+              {height: this.state.hei},
+              {
                 transform: [
-                  {translateX: -120},
-                  {translateY: -75},
+                  {translateX: this.state.tx},
+                  {translateY: this.state.ty},
                 ]
               }]}/>
           </TouchableHighlight>
@@ -318,16 +443,16 @@ var styles = StyleSheet.create({
     paddingLeft: 60,
     paddingRight: 60,
     paddingTop: 100,
-    backgroundColor: '#ddd'
+    backgroundColor: '#ddd',
   },
   wrapper: {
     width:120,
     height:75,
   },
-  rect: {
-    width: 240,
-    height: 150,
-  }
+  // rect: {
+  //   width: 240,
+  //   height: 150,
+  // }
 });
 
 AppRegistry.registerComponent('MyFirstReact', () => MyFirstReact);
