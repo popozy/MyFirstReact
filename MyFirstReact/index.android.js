@@ -225,6 +225,47 @@ var MyFirstReact = React.createClass({
     }
   },
 
+  _onBtnPressHandlerR() {
+    switch (this.state.order) {
+      case 0:
+      this.setState({
+        url0: url_1,
+        url1: url_1,
+        url2: url_1,
+        url3: url_1
+      });
+      this.state.order++;
+        break;
+      case 1:
+      this.setState({
+        url0: url_2,
+        url1: url_2,
+        url2: url_2,
+        url3: url_2
+      });
+      this.state.order++;
+        break;
+      case 2:
+      this.setState({
+        url0: url_3,
+        url1: url_3,
+        url2: url_3,
+        url3: url_3
+      });
+      this.state.order++;
+        break;
+      case 3:
+      this.setState({
+        url0: url_0,
+        url1: url_0,
+        url2: url_0,
+        url3: url_0
+      });
+      this.state.order = 0;
+        break;
+    }
+  },
+
   combine() {
     Animated.parallel([
       Animated.parallel([
@@ -451,17 +492,22 @@ var MyFirstReact = React.createClass({
                 }]}/>
             </TouchableHighlight>
           </Animated.View>
+
+
           <View style={[
             {width: 80},
             {height: 100},
-            {left: -80},
+            // {left: -80},
+            {transform:[
+              {translateX: -80}
+            ]},
             {top:200},
             {resizeMode: 'contain'}
           ]}>
           <TouchableHighlight onPress={this._onBtnPressHandlerL}>
           <Image source={require('./img/button.png')} style={[
             {left:-200},
-            {top: 30},
+            {top: 30}
           ]}/>
           </TouchableHighlight>
           </View>
@@ -469,7 +515,10 @@ var MyFirstReact = React.createClass({
           <View style={[
             {width: 60},
             {height: 100},
-            {right: -140},
+            // {right: -140},
+            {transform: [
+              {translateX: 160}
+            ]},
             {top:200},
             {resizeMode: 'contain'}
           ]}>
