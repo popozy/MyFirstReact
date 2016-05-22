@@ -184,7 +184,7 @@ var MyFirstReact = React.createClass({
     }
   },
 
-  _onBtnPressHandler() {
+  _onBtnPressHandlerL() {
     switch (this.state.order) {
       case 0:
       this.setState({
@@ -451,6 +451,36 @@ var MyFirstReact = React.createClass({
                 }]}/>
             </TouchableHighlight>
           </Animated.View>
+          <View style={[
+            {width: 80},
+            {height: 100},
+            {left: -80},
+            {top:200},
+            {resizeMode: 'contain'}
+          ]}>
+          <TouchableHighlight onPress={this._onBtnPressHandlerL}>
+          <Image source={require('./img/button.png')} style={[
+            {left:-200},
+            {top: 30},
+          ]}/>
+          </TouchableHighlight>
+          </View>
+
+          <View style={[
+            {width: 60},
+            {height: 100},
+            {right: -140},
+            {top:200},
+            {resizeMode: 'contain'}
+          ]}>
+          <TouchableHighlight onPress={this._onBtnPressHandlerR}>
+          <Image source={require('./img/button.png')} style={[
+            {top:30},
+            {right:15},
+          ]}/>
+          </TouchableHighlight>
+          </View>
+
         </View>
     );
   }
