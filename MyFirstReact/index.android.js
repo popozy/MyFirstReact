@@ -57,6 +57,10 @@ var MyFirstReact = React.createClass({
       hei: 150,
       tx: -120,
       ty: -75,
+
+      //btn for slides paging
+      btnXL: -80,
+      btnXR: 160
     }
   },
 
@@ -268,7 +272,7 @@ var MyFirstReact = React.createClass({
 
   combine() {
     Animated.parallel([
-      Animated.parallel([
+
         Animated.timing(this.state.x, {
           toValue: 0,
           duration: 500
@@ -280,10 +284,8 @@ var MyFirstReact = React.createClass({
         Animated.timing(this.state.rotation, {
           toValue: 0,
           duration: 500
-        })
-      ]).start(),
+        }),
 
-      Animated.parallel([
         Animated.timing(this.state.x1, {
           toValue: 0,
           duration: 500
@@ -295,9 +297,8 @@ var MyFirstReact = React.createClass({
         Animated.timing(this.state.rotation1, {
           toValue: 0,
           duration: 500
-        })
-      ]).start(),
-      Animated.parallel([
+        }),
+
         Animated.timing(this.state.x2, {
           toValue: 0,
           duration: 500
@@ -309,9 +310,8 @@ var MyFirstReact = React.createClass({
         Animated.timing(this.state.rotation2, {
           toValue: 0,
           duration: 500
-        })
-      ]).start(),
-      Animated.parallel([
+        }),
+
         Animated.timing(this.state.x3, {
           toValue: 0,
           duration: 500
@@ -323,16 +323,21 @@ var MyFirstReact = React.createClass({
         Animated.timing(this.state.rotation3, {
           toValue: 0,
           duration: 500
-        })
-      ]).start(),
-    ])
+        }),
+    ]).start(),
+    this.setState({
+      btnXL: -80,
+      btnXR: 160
+    })
   },
 
   spread() {
+    this.setState({
+      btnXL: -160,
+      btnXR: 240
+    }),
     Animated.parallel([
       //movement && rotation
-
-      Animated.parallel([
         Animated.timing(this.state.x, {
           toValue: this.state.l,
           duration: 500
@@ -345,9 +350,7 @@ var MyFirstReact = React.createClass({
           toValue: -8,
           duration: 900
         }),
-      ]).start(),
 
-      Animated.parallel([
         Animated.timing(this.state.x1, {
           toValue: this.state.r,
           duration: 500
@@ -359,9 +362,8 @@ var MyFirstReact = React.createClass({
         Animated.timing(this.state.rotation1, {
           toValue: 4,
           duration: 900
-        })
-      ]).start(),
-      Animated.parallel([
+        }),
+
         Animated.timing(this.state.x2, {
           toValue: this.state.l,
           duration: 500
@@ -373,9 +375,8 @@ var MyFirstReact = React.createClass({
         Animated.timing(this.state.rotation2, {
           toValue: 1,
           duration: 900
-        })
-      ]).start(),
-      Animated.parallel([
+        }),
+
         Animated.timing(this.state.x3, {
           toValue: this.state.r,
           duration: 500
@@ -384,12 +385,17 @@ var MyFirstReact = React.createClass({
           toValue: this.state.b,
           duration: 500
         }),
-        Animated.timing(this.state.rotation3, {
-          toValue: -3,
-          duration: 900
-        })
-      ]).start(),
-    ])
+
+      //btn for slides paging
+        // Animated.timing(this.state.btnXL, {
+        //   toValue: -160,
+        //   duration: 500
+        // }),
+        // Animated.timing(this.state.btnXR, {
+        //   toValue:240,
+        //   duration: 500
+        // })
+    ]).start()
   },
 
   render: function() {
@@ -495,12 +501,12 @@ var MyFirstReact = React.createClass({
 
 
           <View style={[
+            {transform:[
+              {translateX: this.state.btnXL}
+            ]},
             {width: 80},
             {height: 100},
             // {left: -80},
-            {transform:[
-              {translateX: -80}
-            ]},
             {top:200},
             {resizeMode: 'contain'}
           ]}>
@@ -513,12 +519,12 @@ var MyFirstReact = React.createClass({
           </View>
 
           <View style={[
+            {transform: [
+              {translateX: this.state.btnXR}
+            ]},
             {width: 60},
             {height: 100},
             // {right: -140},
-            {transform: [
-              {translateX: 160}
-            ]},
             {top:200},
             {resizeMode: 'contain'}
           ]}>
