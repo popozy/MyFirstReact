@@ -18,6 +18,7 @@ var getUrl = function(i){
     return url[i];
 }
 var MyFirstReact = React.createClass({
+<<<<<<< HEAD
     _panResponder: {},
     getInitialState() {
             return {
@@ -54,10 +55,264 @@ var MyFirstReact = React.createClass({
         Animated.timing(this.state.w, {
             toValue: 300,
         }).start();
+=======
+  getInitialState() {
+    return {
+      x: new Animated.Value(0),
+      y: new Animated.Value(0),
+      x1: new Animated.Value(0),
+      y1: new Animated.Value(0),
+      x2: new Animated.Value(0),
+      y2: new Animated.Value(0),
+      x3: new Animated.Value(0),
+      y3: new Animated.Value(0),
+      rotation: new Animated.Value(0),
+      rotation1: new Animated.Value(0),
+      rotation2: new Animated.Value(0),
+      rotation3: new Animated.Value(0),
+      fadeInOpacity: new Animated.Value(0),
+
+      //picture change
+      url0: url_0,
+      url1: url_0,
+      url2: url_0,
+      url3: url_0,
+
+      //order of pic
+      order: 0,
+
+      //state for combine or spread
+      spread: true,
+
+      //4 direction offset Value
+      t: -15,
+      r: 15,
+      b: 15,
+      l: -15,
+
+      // height && weight
+      wid: 240,
+      hei: 150,
+      tx: -120,
+      ty: -75,
+    }
+  },
+
+  _onPressHandler() {
+    if(this.state.spread){
+        this.setState({
+          url0: url_0,
+          url1: url_1,
+          url2: url_2,
+          url3: url_3,
+          wid: 120,
+          hei: 75,
+          tx: 0,
+          ty: 0
+        });
+        this.spread();
+        this.state.spread = false;
+    }
+    else{
+        this.setState({
+          url0: url_0,
+          url1: url_0,
+          url2: url_0,
+          url3: url_0,
+          wid: 240,
+          hei: 150,
+          tx: -120,
+          ty: -75
+        });
+        this.combine();
+        this.state.spread = true;
+    }
+  },
+
+  _onPressHandler2() {
+    if(this.state.spread){
+      this.setState({
+        url0: url_0,
+        url1: url_1,
+        url2: url_2,
+        url3: url_3,
+        wid: 120,
+        hei: 75,
+        tx: 0,
+        ty: 0
+      });
+      this.spread();
+      this.state.spread = false;
+    }
+    else{
+      this.setState({
+        url0: url_1,
+        url1: url_1,
+        url2: url_1,
+        url3: url_1,
+        wid: 240,
+        hei: 150,
+        tx: -120,
+        ty: -75
+      });
+      this.combine();
+      this.state.spread = true;
+    }
+  },
+
+  _onPressHandler3() {
+    if(this.state.spread){
+      this.setState({
+        url0: url_0,
+        url1: url_1,
+        url2: url_2,
+        url3: url_3,
+        wid: 120,
+        hei: 75,
+        tx: 0,
+        ty: 0
+      });
+      this.spread();
+      this.state.spread = false;
+    }
+    else{
+      this.setState({
+        url0: url_2,
+        url1: url_2,
+        url2: url_2,
+        url3: url_2,
+        wid: 240,
+        hei: 150,
+        tx: -120,
+        ty: -75
+      });
+      this.combine();
+      this.state.spread = true;
+    }
+  },
+
+  _onPressHandler4() {
+    if(this.state.spread){
+      this.setState({
+        url0: url_0,
+        url1: url_1,
+        url2: url_2,
+        url3: url_3,
+        wid: 120,
+        hei: 75,
+        tx: 0,
+        ty: 0
+      });
+      this.spread();
+      this.state.spread = false;
+    }
+    else {
+      this.setState({
+        url0: url_3,
+        url1: url_3,
+        url2: url_3,
+        url3: url_3,
+        wid: 240,
+        hei: 150,
+        tx: -120,
+        ty: -75
+      });
+      this.combine();
+      this.state.spread = true;
+    }
+  },
+
+  _onBtnPressHandlerL() {
+    switch (this.state.order) {
+      case 0:
+      this.setState({
+        url0: url_3,
+        url1: url_3,
+        url2: url_3,
+        url3: url_3
+      });
+      this.state.order = 3;
+        break;
+      case 1:
+      this.setState({
+        url0: url_0,
+        url1: url_0,
+        url2: url_0,
+        url3: url_0
+      });
+      this.state.order--;
+        break;
+      case 2:
+      this.setState({
+        url0: url_1,
+        url1: url_1,
+        url2: url_1,
+        url3: url_1
+      });
+      this.state.order--;
+        break;
+      case 3:
+      this.setState({
+        url0: url_2,
+        url1: url_2,
+        url2: url_2,
+        url3: url_2
+      });
+      this.state.order--;
+        break;
+    }
+  },
+
+  _onBtnPressHandlerR() {
+    switch (this.state.order) {
+      case 0:
+      this.setState({
+        url0: url_1,
+        url1: url_1,
+        url2: url_1,
+        url3: url_1
+      });
+      this.state.order++;
+        break;
+      case 1:
+      this.setState({
+        url0: url_2,
+        url1: url_2,
+        url2: url_2,
+        url3: url_2
+      });
+      this.state.order++;
+        break;
+      case 2:
+      this.setState({
+        url0: url_3,
+        url1: url_3,
+        url2: url_3,
+        url3: url_3
+      });
+      this.state.order++;
+        break;
+      case 3:
+      this.setState({
+        url0: url_0,
+        url1: url_0,
+        url2: url_0,
+        url3: url_0
+      });
+      this.state.order = 0;
+        break;
+    }
+  },
+
+  combine() {
+    Animated.parallel([
+      Animated.parallel([
+>>>>>>> parent of 88945d7... slides change
         Animated.timing(this.state.x, {
             toValue: -150,
         }).start();
         Animated.timing(this.state.y, {
+<<<<<<< HEAD
             toValue: -105,
         }).start();
         Animated.timing(this.state.yy, {
@@ -396,6 +651,267 @@ var MyFirstReact = React.createClass({
             </View>
         );
     }
+=======
+          toValue: 0,
+          duration: 500
+        }),
+        Animated.timing(this.state.rotation, {
+          toValue: 0,
+          duration: 500
+        })
+      ]).start(),
+
+      Animated.parallel([
+        Animated.timing(this.state.x1, {
+          toValue: 0,
+          duration: 500
+        }),
+        Animated.timing(this.state.y1, {
+          toValue: 0,
+          duration: 500
+        }),
+        Animated.timing(this.state.rotation1, {
+          toValue: 0,
+          duration: 500
+        })
+      ]).start(),
+      Animated.parallel([
+        Animated.timing(this.state.x2, {
+          toValue: 0,
+          duration: 500
+        }),
+        Animated.timing(this.state.y2, {
+          toValue: 0,
+          duration: 500
+        }),
+        Animated.timing(this.state.rotation2, {
+          toValue: 0,
+          duration: 500
+        })
+      ]).start(),
+      Animated.parallel([
+        Animated.timing(this.state.x3, {
+          toValue: 0,
+          duration: 500
+        }),
+        Animated.timing(this.state.y3, {
+          toValue: 0,
+          duration: 500
+        }),
+        Animated.timing(this.state.rotation3, {
+          toValue: 0,
+          duration: 500
+        })
+      ]).start(),
+    ])
+  },
+
+  spread() {
+    Animated.parallel([
+      //movement && rotation
+
+      Animated.parallel([
+        Animated.timing(this.state.x, {
+          toValue: this.state.l,
+          duration: 500
+        }),
+        Animated.timing(this.state.y, {
+          toValue: this.state.t,
+          duration: 500
+        }),
+        Animated.timing(this.state.rotation, {
+          toValue: -8,
+          duration: 900
+        }),
+      ]).start(),
+
+      Animated.parallel([
+        Animated.timing(this.state.x1, {
+          toValue: this.state.r,
+          duration: 500
+        }),
+        Animated.timing(this.state.y1, {
+          toValue: this.state.t,
+          duration: 500
+        }),
+        Animated.timing(this.state.rotation1, {
+          toValue: 4,
+          duration: 900
+        })
+      ]).start(),
+      Animated.parallel([
+        Animated.timing(this.state.x2, {
+          toValue: this.state.l,
+          duration: 500
+        }),
+        Animated.timing(this.state.y2, {
+          toValue: this.state.b,
+          duration: 500
+        }),
+        Animated.timing(this.state.rotation2, {
+          toValue: 1,
+          duration: 900
+        })
+      ]).start(),
+      Animated.parallel([
+        Animated.timing(this.state.x3, {
+          toValue: this.state.r,
+          duration: 500
+        }),
+        Animated.timing(this.state.y3, {
+          toValue: this.state.b,
+          duration: 500
+        }),
+        Animated.timing(this.state.rotation3, {
+          toValue: -3,
+          duration: 900
+        })
+      ]).start(),
+    ])
+  },
+
+  render: function() {
+    return (
+      // width:800, height: 500
+        <View style={styles.container}>
+          <Animated.View style={[styles.wrapper,
+            {transform: [
+              {translateX: this.state.x},
+              {translateY: this.state.y},
+              {
+                rotateZ: this.state.rotation.interpolate({
+                  inputRange: [0, 360],
+                  outputRange: ['0deg', '360deg']
+                })
+              }
+            ]}
+          ]}
+          >
+            <TouchableHighlight onPress = {this._onPressHandler}>
+              <Animated.Image source={this.state.url0} style={[
+                {width: this.state.wid},
+                {height: this.state.hei},
+              ]}/>
+            </TouchableHighlight>
+          </Animated.View>
+
+          <Animated.View style={[styles.wrapper,
+            {transform: [
+              {translateX: this.state.x1},
+              {translateY: this.state.y1},
+              {
+                rotateZ: this.state.rotation2.interpolate({
+                  inputRange: [0, 360],
+                  outputRange: ['0deg', '360deg']
+                })
+              }
+            ]}
+          ]}
+          >
+            <TouchableHighlight onPress = {this._onPressHandler2}>
+              <Animated.Image source={this.state.url1} style={[
+                {width: this.state.wid},
+                {height: this.state.hei},
+                {
+                  transform: [
+                    {translateX: this.state.tx},
+                    {translateY: 0}
+                  ]
+                }]}/>
+            </TouchableHighlight>
+          </Animated.View>
+
+          <Animated.View style={[styles.wrapper,
+            {transform: [
+              {translateX: this.state.x2},
+              {translateY: this.state.y2},
+              {
+                rotateZ: this.state.rotation1.interpolate({
+                  inputRange: [0, 360],
+                  outputRange: ['0deg', '360deg']
+                })
+              }
+            ]}
+          ]}>
+            <TouchableHighlight onPress = {this._onPressHandler3}>
+              <Animated.Image source={this.state.url2} style={[
+                 {width: this.state.wid},
+                 {height: this.state.hei},
+                 {
+                  transform: [
+                    {translateX: 0},
+                    {translateY: this.state.ty},
+                  ]
+                }]}/>
+            </TouchableHighlight>
+          </Animated.View>
+
+          <Animated.View  style={[styles.wrapper,
+            {transform: [
+              {translateX: this.state.x3},
+              {translateY: this.state.y3},
+              {
+                rotateZ: this.state.rotation3.interpolate({
+                  inputRange: [0, 360],
+                  outputRange: ['0deg', '360deg']
+                })
+              }
+            ]}
+          ]}>
+            <TouchableHighlight onPress = {this._onPressHandler4}>
+              <Animated.Image source={this.state.url3} style={[
+                {width: this.state.wid},
+                {height: this.state.hei},
+                {
+                  transform: [
+                    {translateX: this.state.tx},
+                    {translateY: this.state.ty},
+                  ]
+                }]}/>
+            </TouchableHighlight>
+          </Animated.View>
+
+
+          <View style={[
+            {width: 80},
+            {height: 100},
+            // {left: -80},
+            {transform:[
+              {translateX: -80}
+            ]},
+            {top:200},
+            {resizeMode: 'contain'}
+          ]}>
+          <TouchableHighlight onPress={this._onBtnPressHandlerL}>
+          <Image source={require('./img/button.png')} style={[
+            {left:-200},
+            {top: 30}
+          ]}/>
+          </TouchableHighlight>
+          </View>
+
+          <View style={[
+            {width: 60},
+            {height: 100},
+            // {right: -140},
+            {transform: [
+              {translateX: 160}
+            ]},
+            {top:200},
+            {resizeMode: 'contain'}
+          ]}>
+          <TouchableHighlight onPress={this._onBtnPressHandlerR}>
+          <Image source={require('./img/button.png')} style={[
+            {top:30},
+            {right:15},
+          ]}/>
+          </TouchableHighlight>
+          </View>
+
+        </View>
+    );
+  }
+>>>>>>> parent of 88945d7... slides change
 });
 var styles = StyleSheet.create({
     container: {
