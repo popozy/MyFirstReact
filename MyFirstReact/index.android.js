@@ -255,7 +255,7 @@ var MyFirstReact = React.createClass({
             toValue: 150,
         }).start();
         Animated.timing(this.state.xx1, {
-            toValue: -0,
+            toValue: 0,
         }).start();
         Animated.timing(this.state.x2, {
             toValue: 0,
@@ -343,7 +343,7 @@ var MyFirstReact = React.createClass({
                                 width: this.state.w,
                                 resizeMode: 'contain',
                                 transform: [{translateX: this.state.xx1}, {translateY: this.state.y},]}
-                            }
+                            。
                             source={this.state.url[this.state.url_3]}/>
                         <Animated.Image
                             source={this.state.url[this.state.url_5]}
